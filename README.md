@@ -1,1 +1,3 @@
 # VBA2MatlabForCST
+此程序用于将CST内的VBA代码转化为Matlab代码
+仅能转化CST的对象操作部分，其他部分无法转化
