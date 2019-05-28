@@ -1,3 +1,40 @@
+clc;
+clear;
+close all;
+%%
+% 开始设定建模基本参数
+
+
+% 建模基本参数设置结束
+%%
+% CST文件初始化
+cst = actxserver('CSTStudio.application');%首先载入CST应用控件
+mws = invoke(cst, 'NewMWS');%新建一个MWS项目
+app = invoke(mws, 'GetApplicationName');%获取当前应用名称
+ver = invoke(mws, 'GetApplicationVersion');%获取当前应用版本号
+invoke(mws, 'FileNew');%新建一个CST文件
+path=pwd;%获取当前m文件夹路径
+filename='\IShapeunitcell.cst';%新建的CST文件名字
+fullname=[path filename];
+%invoke(mws, 'SaveAs', fullname, 'True');%True表示保存到目前为止的结果
+invoke(mws, 'DeleteResults');%删除之前的结果。注：在有结果的情况下修改模型会出现弹窗提示是否删除结果，这样运行的程序会停止，需等待手动点击弹窗使之消失
+% CST文件初始化结束
+%%
+%在CST中存储参数
+invoke(mws, 'StoreParameter','RP',8);
+invoke(mws, 'StoreParameter','h',1.491);
+invoke(mws, 'StoreParameter','zhu_r',0.4);
+invoke(mws, 'StoreParameter','r',3.1);
+invoke(mws, 'StoreParameter','k',29);
+invoke(mws, 'StoreParameter','l',4.4);
+invoke(mws, 'StoreParameter','r_in',0.17);
+invoke(mws, 'StoreParameter','hp',1.575);
+invoke(mws, 'StoreParameter','xita',90);
+invoke(mws, 'StoreParameter','f',9.75);
+invoke(mws, 'StoreParameter','a',1.3);
+invoke(mws, 'StoreParameter','b',3.6);
+%%
+% 建模代码开始
 Component = invoke(mws, 'Component');
 invoke(Component, 'New','BanZi');
 Component = invoke(mws, 'Component');
@@ -174,13 +211,13 @@ invoke(Solid, 'Subtract','BanZi:Ground','KuiDian:solid1');
 Solid = invoke(mws, 'Solid');
 invoke(Solid, 'Subtract','BanZi:Ground','KuiDian:solid1_1');
 Solid = invoke(mws, 'Solid');
-invoke(Solid, 'Version','10');
+%invoke(Solid, 'Version 10');
 invoke(Solid, 'Insert','BanZi:JieZhiBan','KuiDian:TongZhou_in');
-invoke(Solid, 'Version','1');
+%invoke(Solid, 'Version 1');
 Solid = invoke(mws, 'Solid');
-invoke(Solid, 'Version','10');
+%invoke(Solid, 'Version 10');
 invoke(Solid, 'Insert','BanZi:JieZhiBan','KuiDian:TongZhou_in_1');
-invoke(Solid, 'Version','1');
+%invoke(Solid, 'Version 1');
 Pick = invoke(mws, 'Pick');
 invoke(Pick, 'PickEdgeFromId','KuiDian:TongZhou_out','1','1');
 Port = invoke(mws, 'Port');
@@ -340,7 +377,7 @@ invoke(Mesh, 'MeshType','PBA');
 invoke(Mesh, 'SetCreator','High Frequency');
 MeshSettings = invoke(mws, 'MeshSettings');
 invoke(MeshSettings, 'SetMeshType','Hex');
-invoke(MeshSettings, 'Set','Version',', 1');
+%invoke(MeshSettings, 'Set','Version',', 1');
 invoke(MeshSettings, 'Set','StepsPerWaveNear','20');
 invoke(MeshSettings, 'Set','StepsPerWaveFar','20');
 invoke(MeshSettings, 'Set','WavelengthRefinementSameAsNear','1');
@@ -517,7 +554,7 @@ invoke(FarfieldPlot, 'PolarizationVector','0.000000e+000','1.000000e+000','0.000
 invoke(FarfieldPlot, 'SetCoordinateSystemType','spherical');
 invoke(FarfieldPlot, 'SetAutomaticCoordinateSystem','True');
 invoke(FarfieldPlot, 'SetPolarizationType','Linear');
-invoke(FarfieldPlot, 'SlantAngle','0#');
+invoke(FarfieldPlot, 'SlantAngle', '0#');
 invoke(FarfieldPlot, 'Origin','bbox');
 invoke(FarfieldPlot, 'Userorigin','0.000000e+000','0.000000e+000','0.000000e+000');
 invoke(FarfieldPlot, 'SetUserDecouplingPlane','False');
@@ -580,7 +617,7 @@ invoke(FarfieldPlot, 'PolarizationVector','0.000000e+000','1.000000e+000','0.000
 invoke(FarfieldPlot, 'SetCoordinateSystemType','spherical');
 invoke(FarfieldPlot, 'SetAutomaticCoordinateSystem','True');
 invoke(FarfieldPlot, 'SetPolarizationType','Linear');
-invoke(FarfieldPlot, 'SlantAngle','0#');
+invoke(FarfieldPlot, 'SlantAngle', '0#');
 invoke(FarfieldPlot, 'Origin','bbox');
 invoke(FarfieldPlot, 'Userorigin','0.000000e+000','0.000000e+000','0.000000e+000');
 invoke(FarfieldPlot, 'SetUserDecouplingPlane','False');
@@ -785,7 +822,7 @@ invoke(FarfieldPlot, 'PolarizationVector','0.000000e+000','1.000000e+000','0.000
 invoke(FarfieldPlot, 'SetCoordinateSystemType','spherical');
 invoke(FarfieldPlot, 'SetAutomaticCoordinateSystem','True');
 invoke(FarfieldPlot, 'SetPolarizationType','Linear');
-invoke(FarfieldPlot, 'SlantAngle','0#');
+invoke(FarfieldPlot, 'SlantAngle', '0#');
 invoke(FarfieldPlot, 'Origin','bbox');
 invoke(FarfieldPlot, 'Userorigin','0.000000e+000','0.000000e+000','0.000000e+000');
 invoke(FarfieldPlot, 'SetUserDecouplingPlane','False');
@@ -852,7 +889,7 @@ invoke(FarfieldPlot, 'PolarizationVector','0.000000e+000','1.000000e+000','0.000
 invoke(FarfieldPlot, 'SetCoordinateSystemType','spherical');
 invoke(FarfieldPlot, 'SetAutomaticCoordinateSystem','True');
 invoke(FarfieldPlot, 'SetPolarizationType','Linear');
-invoke(FarfieldPlot, 'SlantAngle','0#');
+invoke(FarfieldPlot, 'SlantAngle', '0#');
 invoke(FarfieldPlot, 'Origin','bbox');
 invoke(FarfieldPlot, 'Userorigin','0.000000e+000','0.000000e+000','0.000000e+000');
 invoke(FarfieldPlot, 'SetUserDecouplingPlane','False');
@@ -868,3 +905,80 @@ invoke(FarfieldPlot, 'SetPhaseCenterComponent','boresight');
 invoke(FarfieldPlot, 'SetPhaseCenterPlane','both');
 invoke(FarfieldPlot, 'ShowPhaseCenter','True');
 invoke(FarfieldPlot, 'StoreSettings');
+
+
+% 建模结束
+%%
+invoke(plot, 'ZoomToStructure');
+%%端口设置，采用的方法和在CST里面选中一个面然后设置端口是一样的操作，这里完全复现
+pick = invoke(mws, 'Pick');
+invoke(pick, 'PickFaceFromId','Patch:F4B', '1' );
+port = invoke(mws, 'Port');
+invoke(port, 'Reset');
+invoke(port, 'PortNumber', '1');
+invoke(port, 'Label', '');
+invoke(port, 'NumberOfModes', '2');
+invoke(port, 'AdjustPolarization', 'False');
+invoke(port, 'PolarizationAngle', '0.0');
+invoke(port, 'ReferencePlaneDistance', '0');
+invoke(port, 'TextSize', '50');
+invoke(port, 'TextMaxLimit', '0');
+invoke(port, 'Coordinates', 'Picks');
+invoke(port, 'Orientation', 'positive');
+invoke(port, 'PortOnBound', 'False');
+invoke(port, 'ClipPickedPortToBound', 'False');
+invoke(port, 'Xrange', '-P/2', '-P/2');
+invoke(port, 'Yrange', '-P/2', 'P/2');
+invoke(port, 'Zrange', 20, 20);
+invoke(port, 'XrangeAdd', '0.0', '0.0');
+invoke(port, 'YrangeAdd', 0.0, 0.0);
+invoke(port, 'ZrangeAdd', -20, -20);
+invoke(port, 'SingleEnded', 'False');
+invoke(port, 'Create');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%设置远场方向图的Monitor
+monitor = invoke(mws, 'Monitor');
+farfield_monitor = 8:0.5:10;
+for i = 1:length(farfield_monitor)
+     Str_name = ['Farfield (f=',num2str(farfield_monitor(i)),')'];
+     invoke(monitor, 'Reset');
+     invoke(monitor, 'Name', Str_name);
+     invoke(monitor, 'Dimension', 'Volume');
+     invoke(monitor, 'Domain', 'Frequency');
+     invoke(monitor, 'FieldType', 'Farfield');
+     invoke(monitor, 'Frequency', farfield_monitor(i));
+     invoke(monitor, 'Create');
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+solver = invoke(mws, 'Solver');
+export = invoke(mws, 'ASCIIExport');
+plot1D = invoke(mws, 'Plot1D');
+
+
+fid=fopen('S11.txt','w+');
+fclose(fid);
+%获取S11的文件路径，方便保存结果时用
+S11path=which('S11.txt');
+
+% invoke(solver, 'Start');%开始仿真
+% result = invoke(mws, 'Result1D', 'a1(1)1(1)');
+% invoke(result, 'Save', 'E:\CST-MATLAB\what.txt');
+
+        invoke(solver, 'Start');%开始仿真
+        invoke(mws, 'SelectTreeItem', '1D Results\S-Parameters\S1(1),1(1)');%选中S11参数
+        invoke(plot1D, 'PlotView','magnitudedb');%设置显示曲线的单位
+        invoke(plot1D, 'Plot');%绘制S11
+        invoke(export, 'Reset');
+        invoke(export, 'FileName', S11path);
+        invoke(export, 'Execute');%执行
+
+ 
+
+
+invoke(mws, 'Save');%保存
+%invoke(mws, 'Quit');%退出
+
