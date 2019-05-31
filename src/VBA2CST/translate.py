@@ -4,6 +4,11 @@ def translate_with(line:str):
     res = ['NoThing']
     line = line.strip()
     point = line.find('.')
+    if point < 0:
+        line = '.' + line
+    if (line.find('(') >= 0) & (line.find(')') > 0):
+        line = line.replace('(', ' ')
+        line = line.replace(')', '')
     if (line.find('"') >= 0) | (line.find(' ') >= 0):
         # 对含参方法进行解析
         if point != 0:
