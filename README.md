@@ -10,7 +10,7 @@
 2.遇到全局方法直接进行解析
 
 * with 块的基本解析方法：
-     
+```     
      boundary = invoke(mws, 'Boundary');  
      invoke(boundary, 'Xmin', 'electric');%常用的值：”electric””magnetic””open””expanded open””periodic”"conducting wall"等  
      invoke(boundary, 'Xmax', 'electric');  
@@ -23,6 +23,7 @@
      invoke(boundary, 'Zsymmetry', 'none');  
      invoke(boundary, 'ApplyInAllDirections', 'True');  
      release(boundary);  
+```
 ----------------------------------------  
 将被解析为：  
    
